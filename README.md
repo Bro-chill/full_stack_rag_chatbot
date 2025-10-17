@@ -231,7 +231,7 @@ Health check endpoint.
 ```env
 GOOGLE_API_KEY=your_google_gemini_api_key
 GEMINI_MODEL=gemini-2.0-flash
-MONGODB_ATLAS_CLUSTER_URI=mongodb+srv://username:password@cluster.mongodb.net/
+MONGODB_ATLAS_CLUSTER_URI=your_mongodb_uri
 ```
 
 ### Getting API Keys
