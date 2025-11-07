@@ -35,10 +35,17 @@ async def chat(chat_message: ChatMessage):
     """
     try:
         agent = create_chat_agent()
-        result = agent.invoke({"input": chat_message.message})
+        # Use messages format as expected by create_agent
+        result = agent.invoke({
+            "messages": [{"role": "user", "content": chat_message.message}]
+        })
+        
+        # Extract the last message content from the response
+        last_message = result.get("messages", [])[-1] if result.get("messages") else None
+        response_text = last_message.content if last_message else "I couldn't generate a response."
         
         return ChatResponse(
-            response=result.get("output", "I couldn't generate a response."),
+            response=response_text,
             error=None
         )
     except Exception as e:

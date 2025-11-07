@@ -1,5 +1,5 @@
 import os
-from langchain.agents import tool
+from langchain_core.tools import tool
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
