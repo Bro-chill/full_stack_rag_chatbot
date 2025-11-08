@@ -28,6 +28,12 @@ class ChatResponse(BaseModel):
     response: str = Field(..., description="Bot's response")
     error: Optional[str] = None
 
+@app.get("/api/health")
+async def health_check():
+    """Health check endpoint"""
+    return {"status": "ok"}
+
+
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(chat_message: ChatMessage):
     """
@@ -53,11 +59,6 @@ async def chat(chat_message: ChatMessage):
             status_code=500,
             detail=f"Error processing message: {str(e)}"
         )
-
-@app.get("/api/health")
-async def health_check():
-    """Health check endpoint"""
-    return {"status": "ok"}
 
 if __name__ == "__main__":
     import uvicorn

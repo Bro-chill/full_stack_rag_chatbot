@@ -42,13 +42,13 @@ if __name__ == "__main__":
     # Test general question (should NOT use database tool)
     print("\n=== Testing general question ===")
     response = test_agent.invoke({
-        "messages": [{"role": "user", "content": "What is the weather like today?"}]
+        "messages": [{"role": "user", "content": "Tell me about Malaysia."}]
     })
     print("Response:", response['messages'][-1].content)
     
-    # Test database question (should use database tool)
-    print("\n=== Testing database question ===")
-    response = test_agent.invoke({
-        "messages": [{"role": "user", "content": "Tell me about my personal posts"}]
-    })
-    print("Response:", response['messages'][-1].content)
+    # # Test database question (should use database tool)
+    # print("\n=== Testing database question ===")
+    # response = test_agent.invoke({
+    #     "messages": [{"role": "user", "content": "Tell me about my personal posts"}]
+    # })
+    # print("Response:", response['messages'][-1].content)
