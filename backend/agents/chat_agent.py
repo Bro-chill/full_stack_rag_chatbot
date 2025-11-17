@@ -34,17 +34,17 @@ def create_chat_agent():
     
     return agent
 
-# Uncomment below to test the agent directly
+# # Uncomment below to test the agent directly
 
-if __name__ == "__main__":
-    test_agent = create_chat_agent()
+# if __name__ == "__main__":
+#     test_agent = create_chat_agent()
     
-    # Test general question (should NOT use database tool)
-    print("\n=== Testing general question ===")
-    response = test_agent.invoke({
-        "messages": [{"role": "user", "content": "Tell me about Malaysia."}]
-    })
-    print("Response:", response['messages'][-1].content)
+#     # Test general question (should NOT use database tool)
+#     print("\n=== Testing general question ===")
+#     response = test_agent.invoke({
+#         "messages": [{"role": "user", "content": "Tell me about Malaysia."}]
+#     })
+#     print("Response:", response['messages'][-1].content)
     
     # # Test database question (should use database tool)
     # print("\n=== Testing database question ===")
@@ -52,3 +52,43 @@ if __name__ == "__main__":
     #     "messages": [{"role": "user", "content": "Tell me about my personal posts"}]
     # })
     # print("Response:", response['messages'][-1].content)
+
+
+if __name__ == "__main__":
+    test_agent = create_chat_agent()
+    messages = []
+    
+    print("=== Chat Agent Started ===")
+    print("Type 'exit', 'quit', or 'bye' to end the conversation.\n")
+    
+    while True:
+        # Get user input
+        user_input = input("You: ").strip()
+        
+        # Check for exit commands
+        if user_input.lower() in ['exit', 'quit', 'bye']:
+            print("\nGoodbye! Have a great day!")
+            break
+        
+        # Skip empty inputs
+        if not user_input:
+            continue
+        
+        # Add user message to conversation history
+        messages.append({"role": "user", "content": user_input})
+        
+        # Get agent response
+        try:
+            response = test_agent.invoke({"messages": messages})
+            agent_message = response['messages'][-1].content
+            
+            # Add agent response to conversation history
+            messages.append({"role": "assistant", "content": agent_message})
+            
+            # Display agent response
+            print(f"\nAgent: {agent_message}\n")
+            
+        except Exception as e:
+            print(f"\nError: {e}\n")
+            # Remove the last user message if there was an error
+            messages.pop()
